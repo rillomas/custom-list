@@ -1,0 +1,26 @@
+<link rel="import" href="custom-list-item.html">
+<polymer-element name="custom-list">
+	<template>
+		<style>
+		ul#root {
+			list-style-type: none;
+			position: relative;
+		}
+		li {
+			position: absolute;
+		}
+		
+		@-webkit-keyframes fadein {
+			0% {opacity: 0;}
+			100% {opacity: 1;}
+		}
+
+		</style>
+		<ul id="root">
+			<template repeat="{{item in itemlist}}">
+				<li is="custom-list-item" item="{{item}}"></li>
+			</template>
+		</ul>
+	</template>
+	<script type="application/dart" src="custom-list.dart"></script>
+</polymer-element>

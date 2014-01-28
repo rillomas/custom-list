@@ -1,0 +1,10 @@
+<link rel="import" href="custom-list.html">
+<polymer-element name="main-app">
+	<template>
+		<input type="text" value="{{text}}">
+		<button on-click="{{addItem}}">Add Item</button>
+		<!-- <input type="range" value="{{bounceBackNum}}" min="1" max="8"> -->
+		<custom-list itemlist="{{itemList}}" bouncebacknum="{{bounceBackNum}}"></custom-list>
+	</template>
+	<script type="application/dart" src="main-app.dart"></script>
+</polymer-element>
