@@ -1,9 +1,36 @@
 <link rel="import" href="custom-list.html">
 <polymer-element name="main-app">
 	<template>
-		<input type="text" value="{{text}}">
-		<button on-click="{{addItem}}">Add Item</button>
-		<!-- <input type="range" value="{{bounceBackNum}}" min="1" max="8"> -->
+		<style>
+		ul {
+			list-style-type: none;
+		}
+		.header {
+			font-weight: bold;
+			width: 200px;
+			text-align: right;
+			float: left;
+			margin-right: 15px;
+		}
+		</style>
+		<fieldset>
+			<legend>Custom List Control</legend>
+			<p>
+				<label class="header">Add item:</label>
+				<input type="text" value="{{text}}">
+				<button on-click="{{addItem}}">Add</button>
+			</p>
+			<p>
+				<label class="header">Clear Items:</label>
+				<button on-click="{{clearItems}}">Clear</button>
+			</p>
+			<p>
+				<label class="header">Bounceback Count:</label>
+				<button on-click="{{decrementBounceBack}}" disabled?="{{!canDecrement}}">-</button>
+				{{bounceBackNum}}
+				<button on-click="{{incrementBounceBack}}" disabled?="{{!canIncrement}}">+</button>
+			</p>
+		</fieldset>
 		<custom-list itemlist="{{itemList}}" bouncebacknum="{{bounceBackNum}}"></custom-list>
 	</template>
 	<script type="application/dart" src="main-app.dart"></script>

@@ -70,7 +70,7 @@ class CustomList extends PolymerElement {
 					elem.style.left = l;
 					elem.style.top = t;
 					elem.item.rect = posRect;
-					applyAnimation(elem, "fadein", 500);
+					applyAnimation(elem, "fadein", 250);
 					elem.item.entered = true;
 				}
 
@@ -105,6 +105,9 @@ class CustomList extends PolymerElement {
 		element.style.animationTimingFunction = "linear";
 		element.style.animationFillMode = "forwards";
 	}
+
+	static const int MAX_BOUNCEBACK = 10;
+	static const int MIN_BOUNCEBACK = 2;
 
 	Element _root;
 	MutationObserver _observer;
