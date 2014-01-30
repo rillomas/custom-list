@@ -1,3 +1,6 @@
 name: custom_list
 dependencies:
   polymer: any
+transformers:
+- polymer:
+    entry_points: web/index.html
