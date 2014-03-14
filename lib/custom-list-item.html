@@ -1,24 +1,24 @@
 <polymer-element name="custom-list-item" extends="li">
-	<template>
-		<style>
-		.container {
-			padding: 15px;
-			background-color: ghostwhite;
-			border:solid 1px #dedede;
-		}
-		.content {
-			overflow:hidden;
-			padding:5px;
-			display:block;
-		}
-		.text {
-			font-family:'Georgia', Times New Roman, Times, serif
-		}
+  <template>
+    <style>
+    .container {
+      padding: 15px;
+      background-color: ghostwhite;
+      border:solid 1px #dedede;
+    }
+    .content {
+      overflow:hidden;
+      padding:5px;
+      display:block;
+    }
+    .text {
+      font-family:'Georgia', Times New Roman, Times, serif
+    }
 
-		</style>
-		<div id="root" class="container">
-			<div class="content text">{{item.text}}</div>
-		</div>
-	</template>
-	<script type="application/dart" src="custom-list-item.dart"></script>
+    </style>
+    <div id="root" class="container">
+      <div class="content text">{{item.text}}</div>
+    </div>
+  </template>
+  <script type="application/dart" src="custom-list-item.dart"></script>
 </polymer-element>
