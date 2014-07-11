@@ -1,11 +1,9 @@
-import 'dart:math';
-import 'package:polymer/polymer.dart';
+part of view_models;
 
 class ItemViewModel {
   ItemViewModel(this.text);
 
   /// text of this item
-  @observable
   String text;
 
   /// position and size

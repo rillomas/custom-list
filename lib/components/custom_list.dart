@@ -1,7 +1,9 @@
+library custom_list;
+
 import 'dart:html';
 import 'dart:math';
 import 'package:polymer/polymer.dart';
-import 'custom-list-item.dart';
+import 'package:custom_list/components/custom_list_item.dart';
 
 @CustomTag("custom-list")
 class CustomList extends PolymerElement {
@@ -14,9 +16,9 @@ class CustomList extends PolymerElement {
   List itemlist = toObservable([]);
 
   @override
-  void enteredView() {
-    super.enteredView();
-    _root = shadowRoot.querySelector("#root");
+  void attached() {
+    super.attached();
+    _root = $["root"];
 
     // observe change of child elements for a 2 pass layout approach
     var mo = new MutationObserver(onChildMutation);

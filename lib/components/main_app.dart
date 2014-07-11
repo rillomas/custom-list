@@ -1,7 +1,9 @@
+library main_app;
+
 import 'dart:html';
 import 'package:polymer/polymer.dart';
-import 'item_view_model.dart';
-import 'custom-list.dart';
+import 'package:custom_list/view_models/view_models.dart';
+import 'custom_list.dart';
 
 @CustomTag("main-app")
 class MainApp extends PolymerElement {

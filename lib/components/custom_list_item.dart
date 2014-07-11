@@ -1,6 +1,7 @@
+library custom_list_item;
 import 'dart:html';
 import 'package:polymer/polymer.dart';
-import 'item_view_model.dart';
+import 'package:custom_list/view_models/view_models.dart';
 
 /// A custom list item
 @CustomTag("custom-list-item")
