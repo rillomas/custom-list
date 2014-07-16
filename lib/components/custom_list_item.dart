@@ -10,6 +10,5 @@ class CustomListItem extends LIElement with Polymer, Observable {
     polymerCreated();
   }
 
-  @published
-  ItemViewModel item;
+  @published ItemViewModel item;
 }

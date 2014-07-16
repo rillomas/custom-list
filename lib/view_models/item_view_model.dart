@@ -1,10 +1,10 @@
 part of view_models;
 
-class ItemViewModel {
+class ItemViewModel extends Object with Observable {
   ItemViewModel(this.text);
 
   /// text of this item
-  String text;
+  @observable String text;
 
   /// position and size
   Rectangle<int> rect = new Rectangle<int>(0, 0, 0, 0);

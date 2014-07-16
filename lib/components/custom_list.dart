@@ -1,19 +1,20 @@
 library custom_list;
 
+
 import 'dart:html';
 import 'dart:math';
 import 'package:polymer/polymer.dart';
 import 'package:custom_list/components/custom_list_item.dart';
 
+part 'mutation_state.dart';
+
 @CustomTag("custom-list")
 class CustomList extends PolymerElement {
   CustomList.created(): super.created();
 
-  @published
-  int bouncebacknum = 3;
+  @published int bouncebacknum = INITIAL_BOUNCEBACK;
 
-  @published
-  List itemlist = toObservable([]);
+  @published List itemlist = toObservable([]);
 
   @override
   void attached() {
@@ -26,16 +27,24 @@ class CustomList extends PolymerElement {
     _observer = mo;
   }
 
+  void bouncebacknumChanged(int old) {
+    _resetState(bouncebacknum);
+  }
+
+  void imtelistChanged(List old) {
+    _resetState(bouncebacknum);
+  }
+
+  /// Reset the mutation state to default.
+  /// Called when we want to restruct the layout
+  void _resetState(int bounceback) {
+    _state = new MutationState(bounceback);
+  }
+
   /// Called when a mutation occurs to the target element
   void onChildMutation(List<MutationRecord> changes, MutationObserver observer) {
     // layout children depending on its rendering size
 
-    int itemCount = 0;
-    int bounceBackDelta = bouncebacknum - 1;
-    int nextBounceBack = bounceBackDelta;
-    int xOffset = 0;
-    int yOffset = 0;
-    bool offsetRight = true;
     for (var record in changes) {
       var added = record.addedNodes;
       var removed = record.removedNodes;
@@ -61,12 +70,7 @@ class CustomList extends PolymerElement {
         } else {
           // This item is a new one.
           //  Layout the remark at a sufficient position
-          Rectangle<int> posRect;
-          if (offsetRight) {
-            posRect = new Rectangle<int>(xOffset, yOffset, width, height);
-          } else {
-            posRect = new Rectangle<int>(xOffset - width, yOffset, width, height);
-          }
+          var posRect = _state.getPositionRect(width, height);
           var l = "${posRect.left}${unit}";
           var t = "${posRect.top}${unit}";
           elem.style.left = l;
@@ -75,27 +79,8 @@ class CustomList extends PolymerElement {
           applyAnimation(elem, "fadein", 250);
           elem.item.entered = true;
         }
-
-        // update offset depending on direction
-        if (offsetRight) {
-          xOffset += width;
-        } else {
-          xOffset -= width;
-        }
-
-        // update bounceback state
-        if (offsetRight && itemCount == nextBounceBack) {
-          offsetRight = false;
-          xOffset -= width;
-          nextBounceBack += bounceBackDelta;
-        } else if (!offsetRight && itemCount == nextBounceBack) {
-          offsetRight = true;
-          xOffset += width;
-          nextBounceBack += bounceBackDelta;
-        }
-
-        yOffset += height;
-        itemCount++;
+        // update current state
+        _state.update(width, height);
       }
     }
   }
@@ -110,7 +95,9 @@ class CustomList extends PolymerElement {
 
   static const int MAX_BOUNCEBACK = 10;
   static const int MIN_BOUNCEBACK = 2;
+  static const int INITIAL_BOUNCEBACK = 3;
 
   Element _root;
   MutationObserver _observer;
+  MutationState _state = new MutationState(INITIAL_BOUNCEBACK);
 }

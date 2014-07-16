@@ -16,20 +16,15 @@ class MainApp extends PolymerElement {
       new ItemViewModel("elephant"),]);
   }
 
-  @observable
-  List itemList = [];
+  @observable List itemList = [];
 
-  @observable
-  int bounceBackNum = 5;
+  @observable int bounceBackNum = 5;
 
-  @observable
-  bool canIncrement = true;
+  @observable bool canIncrement = true;
 
-  @observable
-  bool canDecrement = true;
+  @observable bool canDecrement = true;
 
-  @observable
-  String text = "";
+  @observable String text = "";
 
   void bounceBackNumChanged(int oldValue) {
     canIncrement = (bounceBackNum < CustomList.MAX_BOUNCEBACK);
