@@ -8,7 +8,7 @@ import 'custom_list.dart';
 @CustomTag("main-app")
 class MainApp extends PolymerElement {
   MainApp.created(): super.created() {
-    itemList = toObservable([
+    itemList = new ObservableList<ItemViewModel>.from([
       new ItemViewModel("aardvark"),
       new ItemViewModel("binturong"),
       new ItemViewModel("caribou"),
@@ -16,7 +16,7 @@ class MainApp extends PolymerElement {
       new ItemViewModel("elephant"),]);
   }
 
-  @observable List itemList = [];
+  @observable ObservableList<ItemViewModel> itemList;
 
   @observable int bounceBackNum = 5;
 
@@ -50,11 +50,11 @@ class MainApp extends PolymerElement {
   }
 
   void resetLayout() {
-    var list = [];
+    var list = new ObservableList<ItemViewModel>();
     for (var item in itemList) {
       list.add(new ItemViewModel(item.text));
     }
-    itemList = toObservable(list);
+    itemList = list;
   }
 
 }

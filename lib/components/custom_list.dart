@@ -1,6 +1,5 @@
 library custom_list;
 
-
 import 'dart:html';
 import 'dart:math';
 import 'package:polymer/polymer.dart';
@@ -14,7 +13,7 @@ class CustomList extends PolymerElement {
 
   @published int bouncebacknum = INITIAL_BOUNCEBACK;
 
-  @published List itemlist = toObservable([]);
+  @published ObservableList itemlist;
 
   @override
   void attached() {
@@ -31,8 +30,11 @@ class CustomList extends PolymerElement {
     _resetState(bouncebacknum);
   }
 
-  void imtelistChanged(List old) {
-    _resetState(bouncebacknum);
+  void itemlistChanged(ObservableList old) {
+    if (itemlist.isEmpty) {
+      // reset the whole state when the list gets emptied
+      _resetState(bouncebacknum);
+    }
   }
 
   /// Reset the mutation state to default.

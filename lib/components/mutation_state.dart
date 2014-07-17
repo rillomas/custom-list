@@ -2,47 +2,48 @@ part of custom_list;
 
 class MutationState {
 	MutationState(int bouncebackNum) {
-		bounceBackDelta = bouncebackNum - 1;
-		nextBounceBack = bounceBackDelta;
+		_bounceBackDelta = bouncebackNum - 1;
+		_nextBounceBack = _bounceBackDelta;
 	}
 
+  /// update current state with the given width and height of the next item
   void update(int width, int height) {
     // update offset depending on direction
-    if (offsetRight) {
-      xOffset += width;
+    if (_offsetRight) {
+      _xOffset += width;
     } else {
-      xOffset -= width;
+      _xOffset -= width;
     }
 
     // update bounceback state
-    if (offsetRight && itemCount == nextBounceBack) {
-      offsetRight = false;
-      xOffset -= width;
-      nextBounceBack += bounceBackDelta;
-    } else if (!offsetRight && itemCount == nextBounceBack) {
-      offsetRight = true;
-      xOffset += width;
-      nextBounceBack += bounceBackDelta;
+    if (_offsetRight && _itemCount == _nextBounceBack) {
+      _offsetRight = false;
+      _xOffset -= width;
+      _nextBounceBack += _bounceBackDelta;
+    } else if (!_offsetRight && _itemCount == _nextBounceBack) {
+      _offsetRight = true;
+      _xOffset += width;
+      _nextBounceBack += _bounceBackDelta;
     }
 
-    yOffset += height;
-    itemCount++;
+    _yOffset += height;
+    _itemCount++;
   }
 
   /// Get sufficient position rect for the next item
   Rectangle<int> getPositionRect(int width, int height) {
-    if (offsetRight) {
-      return new Rectangle<int>(xOffset, yOffset, width, height);
+    if (_offsetRight) {
+      return new Rectangle<int>(_xOffset, _yOffset, width, height);
     } else {
-      return new Rectangle<int>(xOffset - width, yOffset, width, height);
+      return new Rectangle<int>(_xOffset - width, _yOffset, width, height);
     }
   }
 
-  int itemCount = 0;
-  int xOffset = 0;
-  int yOffset = 0;
-  bool offsetRight = true;
-  int bounceBackDelta;
-  int nextBounceBack;
+  int _itemCount = 0;
+  int _xOffset = 0;
+  int _yOffset = 0;
+  bool _offsetRight = true;
+  int _bounceBackDelta;
+  int _nextBounceBack;
 }
 
